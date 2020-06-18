@@ -19,11 +19,11 @@ pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot)
 
 ```{r Carga BD}
 #Cargar base de datos Windows
-#BD= read_sav("C:/Users/Bernardo/Desktop/Multilevel/Casen2017.sav")
+BD <- read_sav("Casen2017.sav")
 
 #Carga Mac
-setwd("~/Documents/Archivos R")
-BD <- read_sav("~/Documents/Archivos R/Casen 2017.sav")
+#setwd("~/Documents/Archivos R")
+#BD <- read_sav("~/Documents/Archivos R/Casen 2017.sav")
 ```
 
 ```{r Selección variables}
