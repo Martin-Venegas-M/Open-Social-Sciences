@@ -1,0 +1,566 @@
+---
+title: 'Migracion y vivienda: estudio de los costos de arriendo para el 2017'
+author: "Venegas, M; Dimter, J; Lafferte, A; Esturillo, D"
+date: "25 de noviembre de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r Carga Paquetes}
+#Datos CASEN 2017#
+#Instalación de librerías
+pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest)
+pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot)
+```
+
+```{r Carga BD}
+#Cargar base de datos Windows
+BD <- read_sav("Casen2017.sav")
+
+#Carga Mac
+#setwd("~/Documents/Archivos R")
+#BD <- read_sav("~/Documents/Archivos R/Casen 2017.sav")
+```
+
+```{r Selección variables}
+
+#Seleccion y recodificación de variable
+BD2=select(BD,
+           
+           #Variables hipotesis:
+           ##Variable dependiente
+           costo_arr = v18, #Valor arriendo #Numerico
+           ##Variable independiente nivel 1
+           nac = r1a, # Nacionalidad #Categorica
+           nac_cual =r1a_esp, # Que nacionalidad #Categorica
+           #Variable indepenidiente nivel 2
+           tipo_uso = v13, #Regimen hogar #categorico
+           
+           #Variable control
+           #Variable control nivel 1
+           #educ_anos = esc, #Nivel Educ mas alto #Némerica
+           sexo, #Sexo #Categorica binaria
+           ano_llegada = r1c_año, #Año de llegada a Chile # Numerico
+           contrato = o17,
+           #disc_color = r9e, #Discriminacion color #Categrica Dummie
+           #disc_extr = r9f, #Discriminado por extranjero #Categorica Dummie
+           ingresos = y1,
+           
+          #tipo_casa = v1,
+           muros = v2,
+           #conservacion_muros = v3,
+           piso = v4,
+           Mt2_vivienda = v12,
+           #subsidio = v14,
+           #dist_agua = v22,
+           #dist_extr = v23,
+           #dist_ener = v24,
+           cant_dorm = v27a,
+           cant_banos = v27b,
+           
+           
+           #Variable control nivel 2
+          v37a, v37b, v37c, v37d, v37e, v37f, v37g, v37h, v37i,
+          #aquí tipo uso a nivel agregado por comuna
+          #aqui promedio ingresos por comuna
+          
+           #Cluster
+          provincia,
+          comuna,
+          region)
+```
+
+```{r Filtrado Tipo de uso + achurado}
+#Filtrar tipo uso: arriendo con contrato y arriendo sin contrato
+options(scipen = 999) #Cambiar notación cientifica
+BD3 <- BD2 %>% filter(tipo_uso %in% 5 | tipo_uso %in% 6)
+BD3 <- BD3 %>% filter(nac %in% 3)
+```
+
+```{r Conversión as.numeric}
+#Convert
+BD3$costo_arr <- as.numeric(BD3$costo_arr)
+BD3$tipo_uso <- as.numeric(BD3$tipo_uso)
+BD3$sexo <- as.numeric(BD3$sexo)
+BD3$contrato <- as.numeric(BD3$contrato)
+BD3$ano_llegada <- as.numeric(BD3$ano_llegada)
+BD3$muros <- as.numeric(BD3$muros)
+BD3$piso <- as.numeric(BD3$piso)
+BD3$Mt2_vivienda <- as.numeric(BD3$Mt2_vivienda)
+BD3$cant_dorm <- as.numeric(BD3$cant_dorm)
+BD3$cant_banos <- as.numeric(BD3$cant_banos)
+
+#BD3$educ_anos <- as.numeric(BD3$educ_anos)
+#BD3$tipo_casa <- as.numeric(BD3$tipo_casa)
+#BD3$conservacion_muros <- as.numeric(BD3$conservacion_muros)
+#BD3$subsidio <- as.numeric(BD3$subsidio)
+#BD3$dist_agua <- as.numeric(BD3$dist_agua)
+#BD3$dist_extr <- as.numeric(BD3$dist_extr)
+#BD3$dist_ener <- as.numeric(BD3$dist_ener)
+
+# Class
+#class(BD3$nac_cual)
+#class(BD3$costo_arr)
+#class(BD3$educ_anos)
+#class(BD3$tipo_uso)
+#class(BD3$sexo)
+#class(BD3$contrato)
+#class(BD3$ano_llegada)
+#class(BD3$tipo_casa)
+#class(BD3$muros)
+#class(BD3$conservacion_muros)
+#class(BD3$piso)
+#class(BD3$Mt2_vivienda)
+#class(BD3$subsidio)
+#class(BD3$dist_agua)
+#class(BD3$dist_extr)
+#class(BD3$dist_ener)
+#class(BD3$cant_dorm)
+#class(BD3$cant_banos)
+
+
+```
+
+```{r Manipulación nacionalidades}
+#Recodificar variables
+#Nacionalidad
+
+BD3$nac_cual[BD3$nac_cual=="ALEMANIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="CROACIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="ESPAÑA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="FRANCIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="HOLANDA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="ITALIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="NORUEGA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="PORTUGAL"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="REINO UNIDO"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="REPÚBLICA CHECA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="RUSIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="SUECIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="TURQUÍA"] <-"EUROPA"
+
+BD3$nac_cual[BD3$nac_cual=="CANADÁ"] <-"NORTEAMERICA"
+BD3$nac_cual[BD3$nac_cual=="MÉXICO"] <-"NORTEAMERICA"
+BD3$nac_cual[BD3$nac_cual=="ESTADOS UNIDOS"] <-"NORTEAMERICA"
+
+BD3$nac_cual[BD3$nac_cual=="CUBA"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="EL SALVADOR"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="PUERTO RICO"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="REPÚBLICA DOMINICANA"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="HAITÍ"] <-"EL CARIBE"
+
+BD3$nac_cual[BD3$nac_cual=="HONDURAS"] <-"CENTROAMERICA"
+BD3$nac_cual[BD3$nac_cual=="COSTA RICA"] <-"CENTROAMERICA"
+BD3$nac_cual[BD3$nac_cual=="NICARAGUA"] <-"CENTROAMERICA"
+BD3$nac_cual[BD3$nac_cual=="GUATEMALA"] <-"CENTROAMERICA"
+
+BD3$nac_cual[BD3$nac_cual=="CHINA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="JAPÓN"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="INDIA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="ISRAEL"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="INDIA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="SIRIA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="PAKISTÁN"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="PALESTINA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="COREA DEL SUR"] <-"ASIA"
+
+BD3$nac_cual[BD3$nac_cual=="GHANA"] <-"AFRICA"
+BD3$nac_cual[BD3$nac_cual=="NIGERIA"] <-"AFRICA"
+BD3$nac_cual[BD3$nac_cual=="REP DEL CONGO"] <-"AFRICA"
+BD3$nac_cual[BD3$nac_cual=="SUDÁFRICA"] <-"AFRICA"
+
+BD3$nac_cual[BD3$nac_cual=="NO RESPONDE"] <-NA
+BD3$nac_cual[BD3$nac_cual=="NO BIEN ESPECIFICADO"] <-NA
+
+BD3$nac_cual[BD3$nac_cual=="PARAGUAY"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="ARGENTINA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="BOLIVIA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="PERÚ"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="BRASIL"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="COLOMBIA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="ECUADOR"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="VENEZUELA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="URUGUAY"] <- "SUDAMERICA"
+freq(BD3$nac_cual)
+BD3 <- BD3[!is.na(BD3$nac_cual),]
+
+
+
+BD3$origen[BD3$nac_cual=="CENTROAMERICA"|BD3$nac_cual=="EL CARIBE"] <-"Centroamérica y el Caribe"
+BD3$origen[BD3$nac_cual=="EUROPA"|BD3$nac_cual=="NORTEAMERICA"|BD3$nac_cual=="ASIA"|BD3$nac_cual== "AFRICA"] <- "Extra-regional"
+BD3$origen[BD3$nac_cual=="SUDAMERICA"] <- "Región Sudaméricana"
+
+
+#Convertir nacionalidad cual
+#BD3$nac_cual <- as.numeric(BD3$nac_cual)
+#BD3 <- BD3 %>% filter(nac %in% 3)
+freq(BD3$origen)
+BD3$origen <- as.factor(BD3$origen)
+BD3$origen <- factor( BD3$origen, levels = levels(BD3$origen )[ c( 2,1,3 ) ] )
+levels(BD3$origen )     # b, c, a
+#BD3$nac_cual_rec <- factor(BD3$nac_cual_rec, labels= c("Chile", "Haiti", "Bolivia", "Peru", "Brasil", "Colombia", "Ecuador", "Venezuela", "Uruguay", "Argentina", "America centro y norte", "Europa", "Asia", "Africa"))
+
+```
+
+```{r Convertir a factor variables categoricas}
+
+#Tipo uso
+BD3$tipo_uso_rec <- as.factor(BD3$tipo_uso)
+BD3$tipo_uso_rec <- factor(BD3$tipo_uso_rec, labels= c("Arriendo con contrato", "Arriendo sin contrato"))
+
+#Comuna
+BD3$comuna_rec <- as.factor(BD3$comuna)
+
+#Sexo
+BD3$sexo_rec <- as.factor(BD3$sexo)
+BD3$sexo_rec <- factor(BD3$sexo_rec, labels= c("Hombre", "Mujer"))
+
+#Contrato
+BD3$contrato[BD3$contrato==4|BD3$contrato==9] <-NA
+BD3$contrato_rec <- as.factor(BD3$contrato)
+BD3$contrato_rec <- factor(BD3$contrato_rec, labels= c("Sí, firmó", "Sí, pero no ha firmado", "No tiene"))
+
+#Tipo casa
+#BD3$tipo_casa_rec <- as.factor(BD3$tipo_casa)
+#BD3$tipo_casa_rec <- factor(BD3$tipo_casa_rec, labels= c("Casa aislada (no pareada)",
+#"Casa pareada por un lado",
+#"Casa pareada por ambos lados",
+#"Departamento en edificio con ascensor",
+#"Departamento en edificio sin ascensor",
+#"Pieza en casa antigua o conventillo",
+#"Mediagua, mejora o vivienda de emergencia",
+#"Vivienda tradicional indígena",
+#"Rancho o choza",
+#"Vivienda precaria de materiales reutilizados (latas, plásticos, cartones, etc.)"))
+
+#Muros
+freq(BD3$muros)
+BD3$muros_rec <- as.factor(BD3$muros)
+BD3$muros_rec <- factor(BD3$muros_rec, labels = c("Hormigón armado",
+"Albañilería (bloque de cemento, piedra o ladrillo)",
+"Tabique forrado por ambas caras (madera, acero, lata u otro)",
+"Tabique sin forro interior (madera u otro)",
+"Adobe, barro, quincha, pirca u otro artesanal tradicional"
+#,"Materiales precarios o de desecho (cartón, latas, sacos, plásticos, etc",
+#"NoN"
+))
+
+
+#Conservacion muros
+#BD3$conservacion_muros_rec <- as.factor(BD3$conservacion_muros)
+#BD3$conservacion_muros_rec <- factor(BD3$conservacion_muros_rec, labels = c("Bueno", "Aceptable", "Malo", "NoN"))
+
+#Piso
+#BD3$piso_rec <- as.factor(BD3$piso)
+#BD3$piso_rec <- factor(BD3$piso_rec, labels = c("Parquet, madera, piso flotante o similar",
+#"Cerámico, porcelanato, flexit o similar",
+#"Alfombra o cubrepiso",
+#"Baldosa de cemento",
+#"Radier",
+#"Tierra", "NoN"))
+
+#Mt2 vivienda
+BD3$Mt2_vivienda[BD3$Mt2_vivienda==9] <-NA
+BD3$Mt2_vivienda_rec <- as.factor(BD3$Mt2_vivienda)
+BD3$Mt2_vivienda_rec <- factor(BD3$Mt2_vivienda_rec, labels = c("Menos de 30 m2",
+"De 30 a 40 m2",
+"De 41 a 60 m2",
+"De 61 a 100 m2",
+"De 101 a 150 m2",
+"Más de 150 m2"))
+
+#Dist agua
+#BD3$dist_agua_rec <- as.factor(BD3$dist_agua)
+#BD3$dist_agua_rec <- factor(BD3$dist_agua_rec, labels = c("Con llave dentro de la vivienda",
+#"Con llave dentro del sitio, pero fuera de la vivienda",
+#"No tiene sistema, la acarrea", "NoN"))
+
+#Dist extr
+#BD3$dist_extr_rec <- as.factor(BD3$dist_extr)
+#BD3$dist_extr_rec <- factor(BD3$dist_extr_rec, labels = c("Sí, con W.C. conectado al alcantarillado",
+#"Sí, con W.C. conectado a fosa séptica",
+#"Sí, con letrina sanitaria conectada a pozo negro",
+#"Sí, con cajón sobre pozo negro",
+#"Sí, con cajón sobre acequia o canal",
+#"Sí, con cajón conectado a otro sistema",
+#"Sí, baño químico dentro del sitio",
+#"No dispone de sistema", "NoN"))
+
+#Dist ener
+#BD3$dist_ener_rec <- as.factor(BD3$dist_ener)
+#BD3$dist_ener_rec <- factor(BD3$dist_ener_rec, labels = c("Sí, de la red pública con medidor propio",
+#"Sí, de la red pública con medidor compartido",
+#"Sí, de la red pública sin medidor",
+#"Sí, de la red pública y un generador propio o comunitario (solar, eólico o fósil)",
+#"Sí, sólo de un generador propio o comunitario (solar, eólico o fósil)",
+#"No dispone de energía eléctrica", "NoN"))
+```
+
+```{r Variable acceso a servicios}
+
+#Variale acceso a servicios
+mlm= BD3 %>% select(v37a, v37b, v37c, v37d, v37e, v37f, v37g, v37h, v37i) %>% as.data.frame()
+mlmF <- mlm
+mlmF$Num <-count_row_if(1,mlm)
+mlmF$Den <-9-count_row_if(9,mlm)
+mlm$Ind <- (mlmF$Num)/(mlmF$Den)
+
+#Indice acceso a servicios
+
+#mlm$total[mlm$total==0] <- "Bajo acceso"
+#mlm$total[mlm$total==1] <- "Bajo acceso"
+#mlm$total[mlm$total==2] <- "Bajo acceso"
+#mlm$total[mlm$total==3] <- "Bajo acceso"
+#mlm$total[mlm$total==4] <- "Mediano acceso"
+#mlm$total[mlm$total==5] <- "Mediano acceso"
+#mlm$total[mlm$total==6] <- "Mediano acceso"
+#mlm$total[mlm$total==7] <- "Alto acceso"
+#mlm$total[mlm$total==8] <- "Alto acceso"
+#mlm$total[mlm$total==9] <- "Alto acceso"
+
+BD3$acceso_servicios <- mlm$Ind
+summary(BD3$acceso_servicios)
+freq(BD3$acceso_servicios)
+```
+
+
+```{r Descriptivos de variables principales}
+#Costo arr
+BD3$costo_arr[BD3$costo_arr==99] <- NA
+#summary(BD3$costo_arr)
+
+#Nacionalidad
+tabla_origen <- freq(BD3$origen)
+tabla_origen <- as.data.frame(tabla_origen)
+
+#Comuna
+tabla_comuna_rec <- freq(BD3$comuna_rec)
+tabla_comuna_rec <- as.data.frame(tabla_comuna_rec)
+#para que quede bien esta tabla habría que etiquetar comuna pero que paja, no creo que lo valga
+
+#Tipo uso
+tabla_tipo_uso_rec <- freq(BD3$tipo_uso_rec)
+tabla_tipo_uso_rec <- as.data.frame (tabla_tipo_uso_rec)
+
+#Índice Acceso a servicios
+
+tabla_acceso_servicios <- freq(BD3$acceso_servicios)
+tabla_acceso_servicios <- as.data.frame (tabla_acceso_servicios)
+
+
+#Tabla bivariada comuna x tipo uso
+table <- table(BD3$comuna, BD3$tipo_uso)
+tabla_comuna_x_tipo_uso <- as.data.frame(table)
+```
+
+
+```{r Scatter plots}
+scatterplot(BD3$costo_arr ~ as.factor(BD3$origen), data=BD3, xlab="Origen", ylab="Costo arriendo", main="Costo arriendo por origen", smooth=FALSE)
+
+
+```
+
+```{r}
+scatterplot(BD3$costo_arr ~ BD3$tipo_uso, data=BD3, xlab="Tipo de uso de la vivienda", ylab="Costo de arriendo", main="Costo arriendo por tipo de uso", smooth=FALSE)
+```
+
+```{r}
+scatterplot(BD3$costo_arr ~ BD3$sexo, data=BD3, xlab="Sexo", ylab="Costo arriendo", main="Costo arriendo por sexo", smooth=FALSE)
+```
+
+```{r}
+scatterplot(BD3$costo_arr ~ BD3$ingresos, data=BD3, xlab="Ingresos", ylab="Costo arriendo", main="Costo arriendo por ingresos", smooth=FALSE)
+```
+
+```{r}
+scatterplot(BD3$costo_arr ~ BD3$contrato, data=BD3, xlab="Contrato", ylab="Costo arriendo", main="Costo arriendo por contrato", smooth=FALSE)
+```
+
+```{r Matriz correlaciones para costo arriendo y variables de control sobre caracteristicas de la vivienda}
+cor_viv<-cor(BD3[c("costo_arr", "muros", "Mt2_vivienda", "cant_dorm", "cant_banos")], use="complete")
+ggcorrplot(cor_viv, hc.order = TRUE, type = "full",lab=TRUE,colors = c("#439BD1", "white", "#FF6C6C"),lab_size=2,tl.cex=8)
+```
+
+```{r Creación variables nivel 2}
+#a) Promedio de Ingresos a nivel de comunas
+ingresos <- BD3 %>% data.frame() %>% select(comuna,ingresos)
+ingresos$ingresos <- as.numeric(ingresos$ingresos)
+ingresos2 <- ingresos %>%group_by(comuna)%>%summarise(mean_ing_comuna=mean(ingresos,na.rm=TRUE))
+BD4 <- merge(BD3 ,ingresos2 ,by="comuna")
+#b)Porcentaje de arriendo sin contrato a nivel comunal)
+perc_arriendo <- BD3 %>% data.frame() %>% select(comuna,tipo_uso)
+perc_arriendo2 <- perc_arriendo %>%group_by(comuna)%>%summarise(sin_contrato_comuna= length(which(tipo_uso==6))/(length(which(tipo_uso==5))+length(which(tipo_uso==6))))
+BD5 <- merge(BD4 ,perc_arriendo2 ,by="comuna")
+#c) Porcentaje migrantes por comuna
+porc_migr <- BD2 %>% data.frame() %>% select(comuna,nac)
+porc_migr2 <- porc_migr %>%group_by(comuna)%>%summarise(porc_migr_comuna= length(which(nac==3))/(length(which(nac==1))+length(which(nac==2))))
+BD6 <- merge(BD5 ,porc_migr2 ,by="comuna")
+#d) Acceso a servicios por comuna
+acceso_comuna <- BD6 %>% data.frame() %>% select(comuna,acceso_servicios) 
+acceso_comuna2 <- acceso_comuna %>%group_by(comuna)%>%summarise(acceso_comunal=mean(acceso_servicios,na.rm=TRUE))
+BD6 <- merge(BD6 ,acceso_comuna2 ,by="comuna")
+#BD6 <- BD5$sin_contrato_comuna
+#View(perc_arriendo2)
+```
+
+
+```{r Matriz de correlaciones para variables a nivel individual}
+BDcor <- BD6
+BDcor$sexo <- as.numeric(BDcor$sexo)
+BDcor$origen <- as.numeric(BDcor$origen)
+cor_ind<-cor(BDcor[c("sexo","origen","ano_llegada","ingresos","contrato","acceso_servicios","muros","Mt2_vivienda","cant_banos","cant_dorm")], use="complete")
+ggcorrplot(cor_ind, hc.order = TRUE, type = "full",lab=TRUE,colors = c("#439BD1", "white", "#FF6C6C"),lab_size=2,tl.cex=8)
+```
+
+```{r Matriz de correlaciones para variables a nivel comunal}
+cor_com<-cor(BD6[c("costo_arr", "mean_ing_comuna", "sin_contrato_comuna","acceso_comunal","porc_migr_comuna")], use="complete")
+ggcorrplot(cor_com, hc.order = TRUE, type = "full",lab=TRUE,colors = c("#439BD1", "white", "#FF6C6C"),lab_size=2,tl.cex=8)
+```
+
+```{r Modelo nulo + ICC}
+results_0a <- lmer(costo_arr ~ 1 + (1 |comuna), data = BD6)
+reghelper::ICC(results_0a)
+#screenreg(results_0a)
+htmlreg(results_0a, file = "results_0a.doc", 
+inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+head.tag = TRUE, body.tag = TRUE)
+```
+
+```{r Modelo 1 con predictores de nivel 1}
+results_1 = lmer(costo_arr ~ 1 + sexo + origen + ano_llegada + tipo_uso_rec + ingresos + contrato_rec + acceso_servicios + muros_rec + Mt2_vivienda_rec + cant_banos + cant_dorm + (1 | comuna), data = BD6)
+levels((BD6$origen))
+label_lvl1 <- c("Intercepto","Sexo","Centroamérica y el Caribe","Sudamérica","Año de llegada","Arriendo sin contrato","Monto de ingresos","Tiene contrato laboral sin firmar","No tiene contrato","Índice de acceso a servicios","Muro de Albañilería (bloque de cemento, piedra o ladrillo)","Muro de Tabique forrado por ambas caras (madera, acero, lata u otro)","Muro de Tabique sin forro interior (madera u otro)","Muro de Adobe, barro, quincha, pirca u otro artesanal tradicional","30 a 40 m2","41 a 60 m2","61 a 100 m2","101 a 150 m2","Más de 150 m2", "Cantidad de baños","Cantidad de dormitorios")
+screenreg(c(results_0a,results_1), naive=TRUE, custom.coef.names = label_lvl1)
+htmlreg(results_1, file = "results_1.doc", 
+inline.css = FALSE, doctype = TRUE, html.tag = TRUE, head.tag = TRUE, body.tag = TRUE, custom.coef.names = label_lvl1)
+```
+
+```{r Modelo 2 con predictores de nivel 2}
+results_2 = lmer(costo_arr ~ 1 + mean_ing_comuna + sin_contrato_comuna + porc_migr_comuna +acceso_comunal+ (1 | comuna), data = BD6)
+label_lvl2 <- c("Intercepto","Ingreso promedio comunal","Porcentaje de arriendo sin contrato comunal","Porcentaje de población migrante comunal","Acceso a servicios promedio comunal")
+screenreg(results_2, naive=TRUE,custom.coef.names = label_lvl2)
+
+htmlreg(results_2, file = "results_2.doc", 
+inline.css = FALSE, doctype = TRUE, html.tag = TRUE, head.tag = TRUE, body.tag = TRUE,custom.coef.names = label_lvl2)
+```
+
+```{r Modelo 3 con predictores de nivel 1 y 2}
+results_3 = lmer(costo_arr ~ 1 + sexo + origen + ano_llegada + tipo_uso_rec + ingresos + contrato_rec + acceso_servicios + muros_rec + Mt2_vivienda_rec + cant_banos + cant_dorm + (1 | comuna) + mean_ing_comuna + sin_contrato_comuna + porc_migr_comuna +acceso_comunal, data = BD6)
+label_lvl12 <- c("Intercepto","Sexo","Centroamérica y el Caribe","Sudamérica","Año de llegada","Arriendo sin contrato","Monto de ingresos","Tiene contrato laboral sin firmar","No tiene contrato","Índice de acceso a servicios","Muro de Albañilería (bloque de cemento, piedra o ladrillo)","Muro de Tabique forrado por ambas caras (madera, acero, lata u otro)","Muro de Tabique sin forro interior (madera u otro)","Muro de Adobe, barro, quincha, pirca u otro artesanal tradicional","30 a 40 m2","41 a 60 m2","61 a 100 m2","101 a 150 m2","Más de 150 m2", "Cantidad de baños","Cantidad de dormitorios","Ingreso promedio comunal","Porcentaje de arriendo sin contrato comunal","Porcentaje de población migrante comunal","Acceso a servicios promedio comunal")
+#screenreg(results_3, naive=TRUE,custom.coef.names = label_lvl12)
+htmlreg(results_3, file = "results_3.doc", 
+inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+head.tag = TRUE, body.tag = TRUE,custom.coef.names = label_lvl12)
+```
+
+```{r Modelo 4 con efectos aleatorios}
+results_4 = lmer(costo_arr ~ 1 + sexo + origen + ano_llegada + tipo_uso_rec + ingresos + contrato_rec + acceso_servicios + muros_rec + Mt2_vivienda_rec + cant_banos + cant_dorm + (1 + origen | comuna) + mean_ing_comuna + sin_contrato_comuna + porc_migr_comuna +acceso_comunal, data = BD6)
+
+#screenreg(results_4, naive=TRUE)
+
+htmlreg(results_4, file = "results_4.doc", 
+inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+head.tag = TRUE, body.tag = TRUE,custom.coef.names = label_lvl12)
+```
+
+
+```{r Modelo 5 interacci?n entre niveles}
+#Antes de hacer el modelo:
+anova(results_3,results_4)
+
+#Modelo
+results_5 = lmer(costo_arr ~ 1 + sexo + origen + ano_llegada + tipo_uso_rec + ingresos + contrato_rec + acceso_servicios + muros_rec + Mt2_vivienda_rec + cant_banos + cant_dorm + (1 + origen | comuna) + mean_ing_comuna + sin_contrato_comuna + porc_migr_comuna +acceso_comunal+ origen*sin_contrato_comuna + origen*acceso_comunal, data = BD6)
+
+label_intera <- c("Intercepto","Sexo","Centroamérica y el Caribe","Sudamérica","Año de llegada","Arriendo sin contrato","Monto de ingresos","Tiene contrato laboral sin firmar","No tiene contrato","Índice de acceso a servicios","Muro de Albañilería (bloque de cemento, piedra o ladrillo)","Muro de Tabique forrado por ambas caras (madera, acero, lata u otro)","Muro de Tabique sin forro interior (madera u otro)","Muro de Adobe, barro, quincha, pirca u otro artesanal tradicional","30 a 40 m2","41 a 60 m2","61 a 100 m2","101 a 150 m2","Más de 150 m2", "Cantidad de baños","Cantidad de dormitorios","Ingreso promedio comunal","Porcentaje de arriendo sin contrato comunal","Porcentaje de población migrante comunal","Acceso a servicios promedio comunal","Centroamérica y el Caribe * %Arriendo sin contrato comunal","Sudamérica * %Arriendo sin contrato comunal","Centroamérica y el Caribe * Acceso a servicios promedio comunal","Sudamérica * Acceso a servicios promedio comunal")
+htmlreg(results_5, file = "results_5.doc", 
+inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+head.tag = TRUE, body.tag = TRUE)
+
+
+```
+
+
+```{r Tabla lista modelos}
+htmlreg(c(results_0a,results_3,results_4,results_5), file = "results_modelos.doc", 
+inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+head.tag = TRUE, body.tag = TRUE,custom.coef.names = label_intera,custom.model.names
+= c("Modelo Nulo","Modelo mixto fijo","Modelo mixto aleatorio","Modelo Interacción"))
+```
+
+#Descriptivos
+```{r Sexo}
+#library(xlsx)
+
+#a) Sexo
+tabla_sexo <- freq(BD6$sexo_rec)
+write.xlsx(tabla_sexo, "tabla_sexo.xlsx")
+#b) Origen
+tabla_origen <- freq(BD6$origen)
+write.xlsx(tabla_origen, "tabla_origen.xlsx")
+
+#c) Cantidad Baños
+tabla_cant_banos <- freq(BD6$cant_banos)
+write.xlsx(tabla_cant_banos, "tabla_cant_banos.xlsx")
+
+#d) Cantidad Dormitorios
+tabla_cant_dorm <- freq(BD6$cant_dorm)
+write.xlsx(tabla_cant_dorm, "tabla_cant_dorm.xlsx")
+
+#e) Año llegada
+tabla_ano_llegada <- freq(BD6$ano_llegada)
+write.xlsx(tabla_ano_llegada, "tabla_ano_llegada.xlsx")
+
+#f) Muros
+tabla_muros_rec <- freq(BD6$muros_rec)
+write.xlsx(tabla_muros_rec, "tabla_muros_rec.xlsx")
+
+#g) Tipo Uso (Arriendo)
+tabla_tipo_uso_rec <- freq(BD6$tipo_uso_rec)
+write.xlsx(tabla_tipo_uso_rec, "tabla_tipo_uso_rec.xlsx")
+
+#h) Contrato
+tabla_contrato_rec <- freq(BD6$contrato_rec)
+write.xlsx(tabla_contrato_rec, "tabla_contrato_rec.xlsx")
+
+#i) Mt2_vivienda
+tabla_Mt2_vivienda_rec <- freq(BD6$Mt2_vivienda_rec)
+write.xlsx(tabla_Mt2_vivienda_rec, "tabla_Mt2_vivienda_rec.xlsx")
+
+#j) Acceso a Servicios
+tabla_acceso_servicios <- freq(BD6$acceso_servicios)
+write.xlsx(tabla_acceso_servicios, "tabla_acceso_servicios.xlsx")
+
+#) Ingresos
+BD6$ingresos[99] <- NA
+BD6 %>% ggplot( aes(x=ingresos)) +
+    geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8) +
+    ggtitle("Ingresos de población migrante que mantiene arriendo")+ scale_x_continuous(limits = c(0,3600000))
+
+#) Costo Arriendo
+BD6 %>% ggplot(aes(x=costo_arr)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("Distribución costo de arriendo")
+
+#) Acceso a servicios
+BD6 %>% ggplot(aes(x=acceso_servicios)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("Distribución índice de acceso a servicios")
+#) Ingreso comunal promedio
+BD6 %>% ggplot(aes(x=mean_ing_comuna)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("Distribución Ingreso comunal promedio")
+
+#) Porcentaje de arriendo sin contrato por comuna
+BD6 %>% ggplot(aes(x=sin_contrato_comuna)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("Distribución Porcentaje de arriendo sin contrato por comuna")
+
+#) Porcentaje de migrantes por comuna
+BD6 %>% ggplot(aes(x=porc_migr_comuna)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("Distribución Porcentaje de migrantes por comuna")
+
+#) Promedio de acceso a servicios a nivel comunal
+BD6 %>% ggplot(aes(x=acceso_comunal)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("Distribución Promedio de acceso a servicios a nivel comunal")
+
+
+BD6 %>% ggplot(aes(x=acceso_comunal)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("Distribución Porcentaje de arriendo sin contrato por comuna")
+
+
+
+```
+
