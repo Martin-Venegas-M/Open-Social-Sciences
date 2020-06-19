@@ -189,9 +189,9 @@ BD3 <- BD3[!is.na(BD3$nac_cual),]
 
 
 
-BD3$origen[BD3$nac_cual=="CENTROAMERICA"|BD3$nac_cual=="EL CARIBE"] <-"Centroamérica y el Caribe"
+BD3$origen[BD3$nac_cual=="CENTROAMERICA"|BD3$nac_cual=="EL CARIBE"] <-"Centroamerica y el Caribe"
 BD3$origen[BD3$nac_cual=="EUROPA"|BD3$nac_cual=="NORTEAMERICA"|BD3$nac_cual=="ASIA"|BD3$nac_cual== "AFRICA"] <- "Extra-regional"
-BD3$origen[BD3$nac_cual=="SUDAMERICA"] <- "Región Sudaméricana"
+BD3$origen[BD3$nac_cual=="SUDAMERICA"] <- "Region Sudamericana"
 ```
 
 
