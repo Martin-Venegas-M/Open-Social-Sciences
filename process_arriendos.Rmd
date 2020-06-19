@@ -384,6 +384,7 @@ BD6 <- merge(BD6 ,acceso_comuna2 ,by="comuna")
 ```
 
 ```{r}
-save(BD6, file = "df_arriendos.RData")
+df_arriendos <- BD6
+save(df_arriendos, file = "df_arriendos.RData")
 ```
 
