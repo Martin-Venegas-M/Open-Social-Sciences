@@ -480,6 +480,9 @@ ggcorrplot(cor_viv, hc.order = TRUE, type = "full",lab=TRUE,colors = c("#439BD1"
 
 ```{r eval=FALSE, include=FALSE}
 # MODELOS
+# Los siguientes Chunks crean los modelos para la tabla de regresión múltiple.
+# En la presente versión reproducible del documento, estos chunks se encuentran sin ejecutar, y la tabla de regresión multiple final se encuentra inserta a partir de una imagen alojada en internet.
+# Si el lector lo requiere puede ejecutar los chunks de los modelos para comprobarlos.
 ```
 
 ```{r Modelo nulo + ICC, eval=FALSE, include=FALSE}
@@ -688,6 +691,15 @@ trabajar con países en específico como Haití, en vista la precariedad con la 
 de estudios más integrales.  
 
 # Referencias {#tit7}
+```{r Renderizar documento, include=FALSE}
+R -e "rmarkdown::render('../Venegas-Esturillo-Entrega1CSA.Rmd')"
+```
+
+
+```{r Descriptivos no utilizados, eval=FALSE, include=FALSE}
+# Los Chunks siguientes muestran tablas y gráficos no utilizados para la presente versión del trabajo
+```
+
 ```{r Descriptios y graficos, eval=FALSE, include=FALSE}
 
 #a) Sexo
