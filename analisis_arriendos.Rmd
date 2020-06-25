@@ -1,5 +1,5 @@
 ---
-title: 'Migracion y vivienda: estudio de los costos de arriendo para el 2017'
+title: 'Migración y vivienda: estudio de los costos de arriendo para el 2017'
 author: "Venegas, M; Dimter, J; Lafferte, A; Esturillo, D"
 date: "25 de diciembre de 2019"
 bibliography: Entrega1CSA.bib
@@ -7,11 +7,14 @@ link-citations: yes
 csl: apa.csl
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache=FALSE, 
-                      warning = FALSE, 
-                      message = FALSE) 
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	cache = FALSE)
+ 
 
 Sys.setlocale("LC_ALL","ES_ES.UTF-8")
+options(scipen = 999)
 ```
 
 ```{r Cargar librerias, include=FALSE}
@@ -35,13 +38,13 @@ h1.title {
 }
 h4.author { /* Header 4 - and the author and data headers use this too  */
     font-size: 18px;
-  font-family: "Times New Roman", Times, serif;
+  
   color: Black;
   text-align: center;
 }
 h4.date { /* Header 4 - and the author and data headers use this too  */
   font-size: 18px;
-  font-family: "Times New Roman", Times, serif;
+  
   color: Black;
   text-align: center;
 }
@@ -53,7 +56,7 @@ h4.date { /* Header 4 - and the author and data headers use this too  */
 - [Objetivos e hipótesis](#tit3)
 - [Datos y metodología](#tit4)
 - [Análisis de resultados](#tit5)
-- [Costos de arriendo de la población migrante, discusión y conclusiones.](#tit6)
+- [Costos de arriendo de la población migrante, discusión y conclusiones](#tit6)
 - [Referencias](#tit7)
 
 # Abstract {#tit1}
@@ -83,19 +86,19 @@ pasar de ser un éxodo de población a convertirse en un país receptor de migra
 migraciones intra-regionales. Sin embargo, esta transformación en sus flujos migratorios no ha ido de
 la mano con una renovación de enfoque en sus políticas de regulación para migrantes, más aún
 considerando que existe un consenso generalizado en la literatura sobre la desactualización e ineficacia
-de la política de regularización migratoria del país (@silvaInmigrantesProfesionalesPropuestas2014; @delasherasMigrantesComoSujetos2016; @figueroaMigracionesChileTres2018; @fundacioncolungaSituacionHabitacionalExtranjeros2018; @arisArisManuelMeza2018; @libertadydesarrolloPoliticasPublicasPara2018. En consecuencia
+de la política de regularización migratoria del país [@silvaInmigrantesProfesionalesPropuestas2014; @delasherasMigrantesComoSujetos2016; @figueroaMigracionesChileTres2018; @fundacioncolungaSituacionHabitacionalExtranjeros2018; @arisArisManuelMeza2018; @libertadydesarrolloPoliticasPublicasPara2018]. En consecuencia
 de esta discordancia, la población migrante se ha visto enfrentada a una seguidilla de barreras que
 terminan por situarlos en una condición de precariedad y de diversas desigualdades en distintos ámbitos
-de su vida (@pnudDesigualesOrigenesCambios2017 La población migrante especialmente afectada por estas situaciones, está
+de su vida [@pnudDesigualesOrigenesCambios2017]. La población migrante especialmente afectada por estas situaciones, está
 referida a lo que señala @tijouxAproximacionesTeoricasPara2015 como población migrante marginada, la cual se encuentra
 precisamente al margen de lo social al llegar a su destino como extranjero (Simmel, 1939 en @tijouxAproximacionesTeoricasPara2015. Con esto, la calificación de migrante se hace un poco más ambigua, generando una distinción
 entre quienes pueden mantenerse sin mayores dificultades debido a sus competencias y quienes buscan
 mejorar sus condiciones de vida viéndose normalmente expuestos a situaciones de vulnerabilidad y
 abusos. “Lejos de ser meramente una distinción jurídica, el carácter de inmigrante conlleva una serie de
-connotaciones negativas (Delgado, 1998 @tijouxAproximacionesTeoricasPara2015 relacionadas con la desnaturalización del
+connotaciones negativas (Delgado, 1998 en @tijouxAproximacionesTeoricasPara2015 relacionadas con la desnaturalización del
 otro mediante la figura del extranjero, del que se encuentra fuera de los límites de la comunidad, y del
 pobre”. Por tanto, el inmigrante como paradigma del extranjero cuestiona el orden social en términos
-económicos y culturales (Simmel, 1939 @tijouxAproximacionesTeoricasPara2015, exponiendo los antagonismos de la sociedad
+económicos y culturales (Simmel, 1939 en @tijouxAproximacionesTeoricasPara2015, exponiendo los antagonismos de la sociedad
 de destino, tales como los de raza, género, nación y clase. A partir de esto, en el presente trabajo se
 trabajará en específico sobre dicha población migrante marginada dado, los componente de clase,
 nación, género y raza, son los que más se imbrican en la mayoría de la población migrante en el país,
@@ -123,7 +126,7 @@ Las condiciones ilustradas por la *Figura 1* se encuentra en concordancia con la
 realizadas a la población migrante respecto a su problemática situación de vivienda y habitabilidad
 propuestas por la literatura. Por un lado, @silvaInmigrantesProfesionalesPropuestas2014 diagnostican los trámites y la falta de
 información acerca de los procesos burocráticos como una barrera general importante para la
-integración del migrante. Por otro lado, el Servicio Jesuita a Migrantes (@roesslerInformeAccesoVivienda2020 señala que el/la migrante
+integración del migrante. Por otro lado, el Servicio Jesuita a Migrantes [@roesslerInformeAccesoVivienda2020] señala que el/la migrante
 está dispuesto a sacrificar condiciones de habitabilidad en aras de aumentar su capacidad de ahorro y
 poder enviar remesas a su país, lo que implica una decisión utilitaria en vista de la urgencia de
 vivienda. En la misma línea, @ramosAccesoViviendaMigracion2017 indica la conformación de un submercado de arriendo
@@ -131,28 +134,28 @@ ilegal asociado a excesivos costos y prácticas de hostigamiento a la población
 comprendiendo que la vivienda es un bien que en los últimos años se ha catalogado como un “vehículo
 de inversión” en tanto sus precios -en particular el arriendo- tienden a aumentar constantemente, la
 relación entre altos costos de vivienda y habitabilidad, y la concentración de población migrante
-intra-regional con necesidades de vivienda, tiende a posicionarse como positiva (@lopez-moralesArriendosPorNubes2018; @pedemonteMIGRACIONCHILEBREVE2016. **De este modo, la condición migrante, y con particular énfasis
+intra-regional con necesidades de vivienda, tiende a posicionarse como positiva [@lopez-moralesArriendosPorNubes2018; @pedemonteMIGRACIONCHILEBREVE2016]. **De este modo, la condición migrante, y con particular énfasis
 en migrantes intra-regionales, está sujeta a _costos de arriendos diferenciales_ y desiguales que
 afectan directamente su habitabilidad respecto a la población chilena.**  
 
 
 El mercado habitacional informal se posiciona como una de las opciones más viables para la solución
 habitacional de la población migrante en virtud de las dificultades legales, laborales, de ingreso, ahorro
-e inversión que deben afrontar (@linkSituacionHabitacionalPersonas2018; @roesslerInformeAccesoVivienda2020. Al respecto, de acuerdo con la encuesta
+e inversión que deben afrontar [@linkSituacionHabitacionalPersonas2018; @roesslerInformeAccesoVivienda2020]. Al respecto, de acuerdo con la encuesta
 Casen 2017, un 78% de la población migrante del país es arrendataria de la propiedad en la que vive,
 siendo la modalidad mayoritaria. Dentro de ello, el 35% lo hace sin contrato y pagando casi 20% más
-del valor de arriendo promedio para la población chilena (@fundacioncolungaSituacionHabitacionalExtranjeros2018. Asimismo, es
+del valor de arriendo promedio para la población chilena [@fundacioncolungaSituacionHabitacionalExtranjeros2018]. Asimismo, es
 interesante señalar que existen diferencias en las condiciones para el arriendo entre regiones del país,
 destacando Santiago y Antofagasta. En Santiago existe una alta oferta de arriendo y costos variados, a
 diferencia de Antofagasta en donde existe una baja oferta y altos costos de arriendo, casi inaccesibles
-para población migrante (@linkSituacionHabitacionalPersonas2018. **Una de las principales razones de estas diferencias de
+para población migrante [@linkSituacionHabitacionalPersonas2018]. **Una de las principales razones de estas diferencias de
 valor de arriendo se debe a la facilidad de los _arriendos sin contrato_ para la población migrante.**
 En cuanto a esto, debido a las condiciones de irregularidad y barreras para la población migrante en lo
 que refiere a estadia, contrato laboral e ingresos, el arriendo sin contrato se vuelve una de las
-principales vías para el acceso a la vivienda (@fundacioncolungaSituacionHabitacionalExtranjeros2018;  @roesslerInformeAccesoVivienda2020. Sin embargo, esta
+principales vías para el acceso a la vivienda [@fundacioncolungaSituacionHabitacionalExtranjeros2018;  @roesslerInformeAccesoVivienda2020]. Sin embargo, esta
 modalidad de arriendo sujeta al migrante a una flexibilidad no fiscalizada de reajustes de costos y
 condiciones restrictivas que decantan en aprovechamientos abusivos en el valor de arriendo para la
-población migrante (; @cnnProblemaHabitacionalMigrante2018. De este modo, el
+población migrante [@cnnProblemaHabitacionalMigrante2018]. De este modo, el
 arriendo sin contrato a la población migrante facilita los arriendos abusivos e influye en los costos
 diferenciales y desiguales. A raíz de ello, el porcentaje de arriendo sin contrato por comuna puede
 posicionarse como un factor general fundamental para describir y analizar de forma más precisa
@@ -161,37 +164,37 @@ las diferencias de costos de arriendo de la población migrante.
 
 Por su parte, otro de los factores asociados a la situación de calidad y valor habitacional, sea en
 términos genéricos como en su relación con la población migrante, refiere al acceso a servicios
-públicos y privados (@linkSituacionHabitacionalPersonas2018;  @winchesterDimensionEconomicaPobreza2008. Los costos de arriendo de la vivienda se ven
+públicos y privados [@linkSituacionHabitacionalPersonas2018;  @winchesterDimensionEconomicaPobreza2008]. Los costos de arriendo de la vivienda se ven
 fuertemente determinados por ciertos factores socio espaciales sustanciales, tales como; el valor del
 suelo, la calidad de la vivienda, el sector y barrio, y _la cercanía de acceso a bienes y servicios_. Sobre
 estos últimos, podemos distinguir entre transportes, centros educacionales, de salud, culturales,
 comunitarios, y hasta incluso, redes y contactos que potencien la movilidad social y la vida laboral
-(@anderssonRacializationMigrationUrban2003; @harveyDerechoCiudad2008. De este modo, el acceso a los diversos
+[@anderssonRacializationMigrationUrban2003; @harveyDerechoCiudad2008]. De este modo, el acceso a los diversos
 servicios que se generan y circulan en las localidades, distinguiendo entre bajas y altas calidades como
 también de escasas y abundantes cantidades, generan efectos directos sobre el hábitat urbano, el precio
-del suelo, el costo de vida, y los costos de arriendo (@lopez-moralesEfectosRenovacionUrbana2015.  
+del suelo, el costo de vida, y los costos de arriendo [@lopez-moralesEfectosRenovacionUrbana2015].  
 
 
 Continuando, la localización territorial se vuelve determinante en las condiciones y valor de
 habitabilidad de la población dado que las diferencias socio-espaciales de los territorios influyen en los
-niveles de calidad de vida e integración social urbana (@lopez-moralesGentrificacionChileAportes2013; @pnudDesigualesOrigenesCambios2017. Entre ellas se
+niveles de calidad de vida e integración social urbana [@lopez-moralesGentrificacionChileAportes2013; @pnudDesigualesOrigenesCambios2017]. Entre ellas se
 encuentran diferencias espaciales en términos de calidad-costo de vida, tipos de barrios, disposición
 urbana -concentración y distribución-, capitales circulantes, mercados inmobiliarios y otros. **Ahora
 bien, una de las principales diferencias espaciales o factor que varía entre comunas refiere,
 precisamente, al _acceso a bienes y servicios que se circunscriben en las diversas comunas_ del país y
 que, como hemos señalado, inciden sobre los costos de arriendo de manera diferencial o brechas
-de arriendo _(rent gap)_ que varían según su localización** (@lopez-moralesArriendosPorNubes2018; @lopez-moralesEfectosRenovacionUrbana2015.  
+de arriendo _(rent gap)_ que varían según su localización** [@lopez-moralesArriendosPorNubes2018; @lopez-moralesEfectosRenovacionUrbana2015].  
 
 
 Respecto a esto último y añadiendo antecedentes de posibles relaciones de interacción entre niveles,
-tanto @linkSituacionHabitacionalPersonas2018 como el Servicio Jesuita a Migrantes (@roesslerInformeAccesoVivienda2020 indican que la población migrante
+tanto @linkSituacionHabitacionalPersonas2018 como el Servicio Jesuita a Migrantes [@roesslerInformeAccesoVivienda2020] indican que la población migrante
 carece, por lo general, de buen acceso a servicios públicos y privados de calidad. Las demostraciones
 de la desigual distribución urbana respaldan lo anterior; alta segregación y emplazamiento a zonas
 periféricas y de bajos recursos, gentrificación y exclusión residencial por la baja capacidad extensiva
-de oportunidades de acceso a servicios (López, 2015). En este sentido, las diferencias de acceso a
+de oportunidades de acceso a servicios [@lopez-moralesEfectosRenovacionUrbana2015]. En este sentido, las diferencias de acceso a
 bienes y servicios a nivel comunal pueden afectar o influenciar la relación que existe entre la condición
 de población migrante sobre las diferencias de costos de arriendo en comparación con la población
-chilena (@lopez-moralesArriendosPorNubes2018; @lopez-moralesEfectosRenovacionUrbana2015.  
+chilena [@lopez-moralesArriendosPorNubes2018; @lopez-moralesEfectosRenovacionUrbana2015].  
 
 
 De igual forma, para el presente estudio se introduce con fines exploratorios determinar el posible
@@ -201,17 +204,17 @@ población chilena. Esto, en virtud de que se estima que a mayor porcentaje de a
 panorama comunal de la relación entre nacionalidad y las diferencias de costos de arriendo tenderá a
 hacia lo positivo puesto que la modalidad de arriendo sin contrato es una de las principales vías
 utilizadas para la solución habitacional por parte de la población migrante y, como ha sido expuesto,
-implicaría mayores costos de arriendo (@arriagadaEyNNegocioSubarriendo2018; @fundacioncolungaSituacionHabitacionalExtranjeros2018; @roesslerInformeAccesoVivienda2020.  
+implicaría mayores costos de arriendo [@arriagadaEyNNegocioSubarriendo2018; @fundacioncolungaSituacionHabitacionalExtranjeros2018; @roesslerInformeAccesoVivienda2020].  
 
 
 Por último, otros posibles factores de nivel individual que son influyentes en los costos de arriendo de
 la población migrante dicen relación con el género, la existencia de contrato laboral y el año de llegada
 al país. Sobre el género, la conjugación de la condición de migrante junto al ser mujer contrae, por lo
 general, mayores desigualdades en diversos planos, entre ellos; el acceso a tratos justos, contratos
-legales, ingresos y segregación territorial (@pnudDesigualesOrigenesCambios2017. En cuanto al segundo, se encuentra
+legales, ingresos y segregación territorial [@pnudDesigualesOrigenesCambios2017]. En cuanto al segundo, se encuentra
 principalmente asociado a las condiciones de estabilidad económica que puede tener una persona al
 momento de acceder al arriendo de una vivienda; una cuestión que no se condice precisamente con la
-precariedad en la que llega y vive la población migrante marginada (@tijouxAproximacionesTeoricasPara2015. Finalmente, el año
+precariedad en la que llega y vive la población migrante marginada [@tijouxAproximacionesTeoricasPara2015]. Finalmente, el año
 de llegada al país dice relación con la variación del precio del mercado inmobiliario, situación que en
 Chile se ha dado al alza. El precio promedio de arriendo en zonas urbanas ha aumentado en un 31,2%
 entre el 2009 y 2015. Para la área metropolitana del Gran Santiago (AMGS) ha sido de un 18% esos
@@ -221,7 +224,7 @@ zonas con alto capital circulante, dado los retornos de la industria minera. A s
 comportamiento del mercado inmobiliario: la causa real del encarecimiento de los arriendos sería “la
 creciente concentración de la propiedad de vivienda adquirida para fines de renta, como sustituto del
 sistema de pensiones, y por fondos de inversión (incluyendo AFP), con cobros de arriendo que
-aseguran rentabilidad a esas inversiones” (@lopez-moralesArriendosPorNubes2018. Con ello, el déficit
+aseguran rentabilidad a esas inversiones” [@lopez-moralesArriendosPorNubes2018]. Con ello, el déficit
 habitacional en Chile se sitúa en más de 450.000 hogares. La oferta, contrariamente a lo que podría
 pensarse, existe en un altísimo nivel. Por esto, si una persona inmigrante logra acceder a un arriendo
 dentro de los años anteriores o primeros de esta situación de alza, se encontrará pagando un menor
@@ -232,13 +235,13 @@ Además, algunos posibles factores de nivel contextual que influyen en los costo
 la calidad de la vivienda, el ingreso promedio por comuna y el porcentaje de población migrante por
 comuna. Respecto a la calidad de vivienda, en tanto medidor básico de desigualdades e índices de
 pobreza, juega un rol sustancial sobre el valor del arriendo y las condiciones de habitabilidad mínimas
-(@pnudDesigualesOrigenesCambios2017. En segundo lugar, el ingreso promedio por comuna se introduce considerando las leyes
+[@pnudDesigualesOrigenesCambios2017]. En segundo lugar, el ingreso promedio por comuna se introduce considerando las leyes
 de oferta y demanda, en donde un ingreso alto a nivel comunal podría guardar relación con costos de
 arriendo directamente proporcionales. Por último, la presencia de población migrante por comuna es
 un indicador básico de la estimación de la demanda de vivienda comunal. Inclusive, actualmente la alta
 cantidad de población migrante genera una demanda habitacional que presiona sobre los precios de
 vivienda en diferentes comunas del país, por lo que se considera un predictor de control influyente
-(@lopez-moralesArriendosPorNubes2018.  
+[@lopez-moralesArriendosPorNubes2018].  
 
 
 Esbozado lo anterior, y considerando la naturaleza multinivel del presente estudio, se procede a
@@ -349,7 +352,7 @@ Tomando como referencia las variables consideradas, se presentan a continuación
 una:  
 
 **Gráfico 1:** _Descriptiva de variable costos de arriendo_
-```{r Grafico 1: Descriptiva de variable costo arriendo}
+```{r Grafico 1: Descriptiva de variable costo arriendo, echo=FALSE}
 #) Costo Arriendo
 df_arriendos %>% ggplot(aes(x=costo_arr)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("")
 ```
@@ -357,7 +360,7 @@ df_arriendos %>% ggplot(aes(x=costo_arr)) + geom_density(fill="#69b3a2", color="
 Fuente: Elaboración propia a partir de CASEN 2017    
 
 **Tabla 1:** *Descriptiva variable origen*
-```{r Tabla descriptiva origen, results='asis'}
+```{r Tabla descriptiva origen, echo=FALSE, results='asis'}
 summarytools::freq(df_arriendos$origen, report.nas = FALSE, headings = FALSE)
 ```
 
@@ -369,7 +372,7 @@ justificación de esta codificación recae en que 1) permite entender diferencia
 intra regionales y 2) permite conocer con mayor detalle características de migrantes intra-regionales.  
 
 **Tabla 2:** *Descriptiva variable tipo de uso de la vivienda*
-```{r Tabla descriptiva tipo uso, results='asis'}
+```{r Tabla descriptiva tipo uso, echo=FALSE, results='asis'}
 summarytools::freq(df_arriendos$tipo_uso_rec, report.nas = FALSE, headings = FALSE)
 ```
 
@@ -381,7 +384,7 @@ excluidas debido al objeto de investigación. Esta variable se construye nivel c
 variable independiente de nivel 2 el **porcentaje de arriendo sin contrato en la comuna.**  
 
 **Tabla 3:** *Descriptiva variable acceso a servicios básicos*
-```{r Tabla descriptiva acceso a servicios, results='asis'}
+```{r Tabla descriptiva acceso a servicios, echo=FALSE, results='asis'}
 summarytools::freq(df_arriendos$acceso_servicios, plain.ascii = FALSE, style = "rmarkdown", headings = FALSE)
 ```
 
@@ -424,7 +427,7 @@ estimaciones de nacionalidad (r1a_esp) distribuyendo los datos por las respectiv
 **Matriz de correlaciones 1:** *Variables a nivel individual*
 
 
-```{r Matriz de correlaciones para variables a nivel individual}
+```{r Matriz de correlaciones para variables a nivel individual, echo=FALSE}
 df_arriendos_cor <- df_arriendos
 df_arriendos_cor$sexo <- as.numeric(df_arriendos_cor$sexo)
 df_arriendos_cor$origen <- as.numeric(df_arriendos_cor$origen)
@@ -444,7 +447,7 @@ mayor metros cuadrados mayor costo de arriendo.
 
 
 **Matriz de correlaciones 2:** *Variables a nivel comunal*
-```{r Matriz de correlaciones para variables a nivel comunal}
+```{r Matriz de correlaciones para variables a nivel comunal, echo=FALSE}
 cor_com<-cor(df_arriendos[c("costo_arr", "mean_ing_comuna", "sin_contrato_comuna","acceso_comunal","porc_migr_comuna")], use="complete")
 ggcorrplot(cor_com, hc.order = TRUE, type = "full",lab=TRUE,colors = c("#439BD1", "white", "#FF6C6C"),lab_size=2,tl.cex=8)
 ```
@@ -617,7 +620,7 @@ tendrá, en promedio, costos de arriendo 100.733 más bajos que la población mi
 cuando el índice de acceso a servicios básicos a nivel comunal es variable. **La hipótesis se acepta,
 puesto que existen cambios en la relación por la variable de interacción.**  
 
-# Costos de arriendo de la población migrante, discusión y conclusiones. {#tit6}
+# Costos de arriendo de la población migrante, discusión y conclusiones {#tit6}
 A modo de reflexiones con respecto a los datos presentados en el informe, es que se hace interesante
 señalar lo siguiente.  
 
@@ -677,11 +680,11 @@ tenderán a ser mayores, lo cual va en concordancia con las leyes del mercado. P
 de las comunas con menores ingresos y costos de arriendo más bajos se encuentran, dentro de Santiago,
 Estación Central ($290.000), Independencia y Santiago ($300.000). Las comunas con mayores ingresos
 y mayores costos de arriendo sería el sector oriente de Santiago, con Lo Barnechea ($1.200.000),
-Vitacura ($1.060.000) y Las Condes ($760.000) (@ministeriodeviviendayurbanismoEstimacionAnalisisPrecios2016.  
+Vitacura ($1.060.000) y Las Condes ($760.000) [@ministeriodeviviendayurbanismoEstimacionAnalisisPrecios2016].  
 
 En aras de la contingencia de temas de migración, se deja sobre la mesa los datos y la discusión acá
 planteadas para ser puntos de inicio para investigaciones futura. Se propone como lineamientos futuros
-trabajar con países en específico como Haití, en vista la precariedad con la que residen en Chile (@roesslerInformeAccesoVivienda2020 y asimismo se propone la difusión del uso de herramientas multinivel para la realización futura
+trabajar con países en específico como Haití, en vista la precariedad con la que residen en Chile [@roesslerInformeAccesoVivienda2020] y asimismo se propone la difusión del uso de herramientas multinivel para la realización futura
 de estudios más integrales.  
 
 # Referencias {#tit7}
