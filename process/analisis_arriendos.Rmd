@@ -21,7 +21,7 @@ options(scipen = 999)
 # Cargar librerías
 library(pacman)
 pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest, citr)
-pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, reghelper, openxlsx, summarytools)
+pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, reghelper, openxlsx, summarytools, rmarkdown)
 ```
 
 ```{r Cargar base de datos, include=FALSE}
@@ -692,7 +692,7 @@ de estudios más integrales.
 
 # Referencias {#tit7}
 ```{r Renderizar documento, include=FALSE}
-R -e "rmarkdown::render('../Venegas-Esturillo-Entrega1CSA.Rmd')"
+rmarkdown::render('analisis_arriendos.Rmd')
 ```
 
 
