@@ -691,9 +691,6 @@ trabajar con países en específico como Haití, en vista la precariedad con la 
 de estudios más integrales.  
 
 # Referencias {#tit7}
-```{r Renderizar documento, include=FALSE}
-rmarkdown::render('analisis_arriendos.Rmd')
-```
 
 
 ```{r Descriptivos no utilizados, eval=FALSE, include=FALSE}
