@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Statistical models</title>
+<style>
+table.texreg {margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;}
+table.texreg thead .rule {border-bottom: 1px solid #000000;}
+table.texreg tbody tr.rule td {border-top: 1px solid #000000;}
+table.texreg tbody tr.bottomrule td {border-bottom: 2px solid #000000;}
+table.texreg tfoot td {font-size: 0.8em;}
+table.texreg th, table.texreg td {padding-left: 5px;padding-right: 5px;}
+</style>
+</head>
+<body>
+<table class="texreg">
+<caption>Statistical models</caption>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Model 1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rule">
+<td>Intercepto</td>
+<td>27141.81</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(58957.92)</td>
+</tr>
+<tr>
+<td>Sexo</td>
+<td>8995.68</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(5076.10)</td>
+</tr>
+<tr>
+<td>Centroamerica y el Caribe</td>
+<td>16912.41</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(17584.68)</td>
+</tr>
+<tr>
+<td>Sudamerica</td>
+<td>8388.66</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(15955.12)</td>
+</tr>
+<tr>
+<td>Ano de llegada</td>
+<td>1.48</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(0.95)</td>
+</tr>
+<tr>
+<td>Arriendo sin contrato</td>
+<td>-67386.82<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(6082.90)</td>
+</tr>
+<tr>
+<td>Monto de ingresos</td>
+<td>0.07<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(0.01)</td>
+</tr>
+<tr>
+<td>Tiene contrato laboral sin firmar</td>
+<td>-7860.70</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(19514.23)</td>
+</tr>
+<tr>
+<td>No tiene contrato</td>
+<td>-1158.50</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(7356.06)</td>
+</tr>
+<tr>
+<td>indice de acceso a servicios</td>
+<td>23044.96</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(19755.86)</td>
+</tr>
+<tr>
+<td>Muro de Albanileria (bloque de cemento, piedra o ladrillo)</td>
+<td>-43658.08<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(6906.34)</td>
+</tr>
+<tr>
+<td>Muro de Tabique forrado por ambas caras (madera, acero, lata u otro)</td>
+<td>-42127.45<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(8840.48)</td>
+</tr>
+<tr>
+<td>Muro de Tabique sin forro interior (madera u otro)</td>
+<td>-66988.19<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(17417.27)</td>
+</tr>
+<tr>
+<td>Muro de Adobe, barro, quincha, pirca u otro artesanal tradicional</td>
+<td>-68404.12<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(12761.51)</td>
+</tr>
+<tr>
+<td>30 a 40 m2</td>
+<td>26626.73<sup>**</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(9354.28)</td>
+</tr>
+<tr>
+<td>41 a 60 m2</td>
+<td>52330.81<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(8541.48)</td>
+</tr>
+<tr>
+<td>61 a 100 m2</td>
+<td>86014.14<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(8998.70)</td>
+</tr>
+<tr>
+<td>101 a 150 m2</td>
+<td>127446.98<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(13026.09)</td>
+</tr>
+<tr>
+<td>Mas de 150 m2</td>
+<td>216320.76<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(18174.30)</td>
+</tr>
+<tr>
+<td>Cantidad de banos</td>
+<td>1069.25</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(877.91)</td>
+</tr>
+<tr>
+<td>Cantidad de dormitorios</td>
+<td>-452.86</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(734.70)</td>
+</tr>
+<tr>
+<td>Ingreso promedio comunal</td>
+<td>0.13<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(0.02)</td>
+</tr>
+<tr>
+<td>Porcentaje de arriendo sin contrato comunal</td>
+<td>15943.44</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(25386.25)</td>
+</tr>
+<tr>
+<td>Porcentaje de poblacion migrante comunal</td>
+<td>101387.31</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(110228.72)</td>
+</tr>
+<tr>
+<td>Acceso a servicios promedio comunal</td>
+<td>60404.36</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(60754.91)</td>
+</tr>
+<tr class="rule">
+<td>AIC</td>
+<td>54518.22</td>
+</tr>
+<tr>
+<td>BIC</td>
+<td>54670.77</td>
+</tr>
+<tr>
+<td>Log Likelihood</td>
+<td>-27232.11</td>
+</tr>
+<tr>
+<td>Num. obs.</td>
+<td>2100</td>
+</tr>
+<tr>
+<td>Num. groups: comuna</td>
+<td>129</td>
+</tr>
+<tr>
+<td>Var: comuna (Intercept)</td>
+<td>4368846395.62</td>
+</tr>
+<tr class="bottomrule">
+<td>Var: Residual</td>
+<td>12326889942.80</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="2"><sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05</td>
+</tr>
+</tfoot>
+</table>
+</body>
+</html>

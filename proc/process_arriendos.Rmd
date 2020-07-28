@@ -1,0 +1,259 @@
+---
+title: "Documento de procesamiento de datos para trabajo: Migración y vivienda: estudio de los costos de arriendo para el 2017"
+author: "Venegas, M; Dimter, J; Lafferte, A; Esturillo, D"
+date: "18/6/2020"
+output: html_document
+---
+# Resumen  
+En el presente documento se procesa la base de datos de la Encuesta de Caracterización Socioeconómica (CASEN) en su versión 2017, con el fin de producir una base de datos con lo estrictamente necesario para el desarrollo del trabajo en curso. 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r Carga Paquetes}
+#Datos CASEN 2017#
+#Instalación de librerías
+pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest)
+pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, reghelper, openxlsx)
+```
+
+```{r Carga BD}
+#Cargar base de datos Windows
+BD <- read_sav("../input/data/Casen2017.sav")
+```
+
+```{r Selección variables}
+#Seleccion y recodificación de variable
+BD2=select(BD,
+           
+           #Variables hipotesis:
+           ##Variable dependiente
+           costo_arr = v18, #Valor arriendo #Numerico
+           ##Variable independiente nivel 1
+           nac = r1a, # Nacionalidad #Categorica
+           nac_cual =r1a_esp, # Que nacionalidad #Categorica
+           #Variable indepenidiente nivel 2
+           tipo_uso = v13, #Regimen hogar #categorico
+           
+           #Variable control
+           #Variable control nivel 1
+           #educ_anos = esc, #Nivel Educ mas alto #Némerica
+           sexo, #Sexo #Categorica binaria
+           ano_llegada = r1c_año, #Año de llegada a Chile # Numerico
+           contrato = o17,
+           #disc_color = r9e, #Discriminacion color #Categrica Dummie
+           #disc_extr = r9f, #Discriminado por extranjero #Categorica Dummie
+           ingresos = y1,
+           
+          #tipo_casa = v1,
+           muros = v2,
+           #conservacion_muros = v3,
+           piso = v4,
+           Mt2_vivienda = v12,
+           #subsidio = v14,
+           #dist_agua = v22,
+           #dist_extr = v23,
+           #dist_ener = v24,
+           cant_dorm = v27a,
+           cant_banos = v27b,
+           
+           
+           #Variable control nivel 2
+          v37a, v37b, v37c, v37d, v37e, v37f, v37g, v37h, v37i,
+          #aquí tipo uso a nivel agregado por comuna
+          #aqui promedio ingresos por comuna
+          
+           #Cluster
+          provincia,
+          comuna,
+          region)
+```
+
+```{r Filtrado Tipo de uso + achurado}
+#Filtrar tipo uso: arriendo con contrato y arriendo sin contrato
+options(scipen = 999) #Cambiar notación cientifica
+BD3 <- BD2 %>% filter(tipo_uso %in% 5 | tipo_uso %in% 6)
+BD3 <- BD3 %>% filter(nac %in% 3)
+```
+
+```{r Conversión variables numericas}
+#Convert
+BD3$costo_arr <- as.numeric(BD3$costo_arr)
+BD3$tipo_uso <- as.numeric(BD3$tipo_uso)
+BD3$sexo <- as.numeric(BD3$sexo)
+BD3$contrato <- as.numeric(BD3$contrato)
+BD3$ano_llegada <- as.numeric(BD3$ano_llegada)
+BD3$muros <- as.numeric(BD3$muros)
+BD3$piso <- as.numeric(BD3$piso)
+BD3$Mt2_vivienda <- as.numeric(BD3$Mt2_vivienda)
+BD3$cant_dorm <- as.numeric(BD3$cant_dorm)
+BD3$cant_banos <- as.numeric(BD3$cant_banos)
+
+# Class
+class(BD3$costo_arr)
+class(BD3$tipo_uso)
+class(BD3$sexo)
+class(BD3$contrato)
+class(BD3$ano_llegada)
+class(BD3$muros)
+class(BD3$piso)
+class(BD3$Mt2_vivienda)
+class(BD3$cant_dorm)
+class(BD3$cant_banos)
+```
+
+```{r Manipulación nacionalidades}
+#Recodificar variables
+#Nacionalidad
+BD3$nac_cual[BD3$nac_cual=="ALEMANIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="CROACIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="ESPAÑA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="FRANCIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="HOLANDA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="ITALIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="NORUEGA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="PORTUGAL"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="REINO UNIDO"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="REPÚBLICA CHECA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="RUSIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="SUECIA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="TURQUÍA"] <-"EUROPA"
+BD3$nac_cual[BD3$nac_cual=="CANADÁ"] <-"NORTEAMERICA"
+BD3$nac_cual[BD3$nac_cual=="MÉXICO"] <-"NORTEAMERICA"
+BD3$nac_cual[BD3$nac_cual=="ESTADOS UNIDOS"] <-"NORTEAMERICA"
+BD3$nac_cual[BD3$nac_cual=="CUBA"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="EL SALVADOR"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="PUERTO RICO"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="REPÚBLICA DOMINICANA"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="HAITÍ"] <-"EL CARIBE"
+BD3$nac_cual[BD3$nac_cual=="HONDURAS"] <-"CENTROAMERICA"
+BD3$nac_cual[BD3$nac_cual=="COSTA RICA"] <-"CENTROAMERICA"
+BD3$nac_cual[BD3$nac_cual=="NICARAGUA"] <-"CENTROAMERICA"
+BD3$nac_cual[BD3$nac_cual=="GUATEMALA"] <-"CENTROAMERICA"
+BD3$nac_cual[BD3$nac_cual=="CHINA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="JAPÓN"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="INDIA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="ISRAEL"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="INDIA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="SIRIA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="PAKISTÁN"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="PALESTINA"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="COREA DEL SUR"] <-"ASIA"
+BD3$nac_cual[BD3$nac_cual=="GHANA"] <-"AFRICA"
+BD3$nac_cual[BD3$nac_cual=="NIGERIA"] <-"AFRICA"
+BD3$nac_cual[BD3$nac_cual=="REP DEL CONGO"] <-"AFRICA"
+BD3$nac_cual[BD3$nac_cual=="SUDÁFRICA"] <-"AFRICA"
+BD3$nac_cual[BD3$nac_cual=="NO RESPONDE"] <-NA
+BD3$nac_cual[BD3$nac_cual=="NO BIEN ESPECIFICADO"] <-NA
+BD3$nac_cual[BD3$nac_cual=="PARAGUAY"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="ARGENTINA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="BOLIVIA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="PERÚ"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="BRASIL"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="COLOMBIA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="ECUADOR"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="VENEZUELA"] <- "SUDAMERICA"
+BD3$nac_cual[BD3$nac_cual=="URUGUAY"] <- "SUDAMERICA"
+
+freq(BD3$nac_cual) # Frecuencia nacionalidad 
+BD3 <- BD3[!is.na(BD3$nac_cual),] # Extraer NA
+
+# Recodificar nac_cual
+BD3$origen[BD3$nac_cual=="CENTROAMERICA"|BD3$nac_cual=="EL CARIBE"] <-"Centroamerica y el Caribe"
+BD3$origen[BD3$nac_cual=="EUROPA"|BD3$nac_cual=="NORTEAMERICA"|BD3$nac_cual=="ASIA"|BD3$nac_cual== "AFRICA"] <- "Extra-regional"
+BD3$origen[BD3$nac_cual=="SUDAMERICA"] <- "Region Sudamericana"
+```
+
+
+```{r Freq origen, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+freq(BD3$origen) # Frecuencia origen
+
+# Convertir variable origen a factor
+BD3$origen <- as.factor(BD3$origen)
+BD3$origen <- factor( BD3$origen, levels = levels(BD3$origen )[ c( 2,1,3 ) ] )
+levels(BD3$origen )     # b, c, a
+```
+
+```{r Convertir a factor variables categoricas}
+#Tipo uso
+BD3$tipo_uso_rec <- as.factor(BD3$tipo_uso)
+BD3$tipo_uso_rec <- factor(BD3$tipo_uso_rec, labels= c("Arriendo con contrato", "Arriendo sin contrato"))
+#Comuna
+BD3$comuna_rec <- as.factor(BD3$comuna)
+#Sexo
+BD3$sexo_rec <- as.factor(BD3$sexo)
+BD3$sexo_rec <- factor(BD3$sexo_rec, labels= c("Hombre", "Mujer"))
+#Contrato
+BD3$contrato[BD3$contrato==4|BD3$contrato==9] <-NA
+BD3$contrato_rec <- as.factor(BD3$contrato)
+BD3$contrato_rec <- factor(BD3$contrato_rec, labels= c("Sí, firmó", "Sí, pero no ha firmado", "No tiene"))
+#Muros
+freq(BD3$muros)
+BD3$muros_rec <- as.factor(BD3$muros)
+BD3$muros_rec <- factor(BD3$muros_rec, labels = c("Hormigon armado",
+"Albañilería (bloque de cemento, piedra o ladrillo)",
+"Tabique forrado por ambas caras (madera, acero, lata u otro)",
+"Tabique sin forro interior (madera u otro)",
+"Adobe, barro, quincha, pirca u otro artesanal tradicional"
+#,"Materiales precarios o de desecho (cartón, latas, sacos, plásticos, etc",
+#"NoN"
+))
+#Mt2 vivienda
+BD3$Mt2_vivienda[BD3$Mt2_vivienda==9] <-NA
+BD3$Mt2_vivienda_rec <- as.factor(BD3$Mt2_vivienda)
+BD3$Mt2_vivienda_rec <- factor(BD3$Mt2_vivienda_rec, labels = c("Menos de 30 m2",
+"De 30 a 40 m2",
+"De 41 a 60 m2",
+"De 61 a 100 m2",
+"De 101 a 150 m2",
+"Más de 150 m2"))
+```
+
+```{r Variable acceso a servicios}
+#Variale acceso a servicios
+mlm= BD3 %>% select(v37a, v37b, v37c, v37d, v37e, v37f, v37g, v37h, v37i) %>% as.data.frame()
+mlmF <- mlm
+mlmF$Num <-count_row_if(1,mlm)
+mlmF$Den <-9-count_row_if(9,mlm)
+mlm$Ind <- (mlmF$Num)/(mlmF$Den)
+
+#Indice acceso a servicios
+BD3$acceso_servicios <- mlm$Ind # Crear indice
+summary(BD3$acceso_servicios) # Descriptivos
+freq(BD3$acceso_servicios) # Frecuencias
+```
+
+
+```{r Recode NA costo arriendo}
+#Costo arr
+BD3$costo_arr[BD3$costo_arr==99] <- NA
+```
+
+```{r Creación variables nivel 2}
+#a) Promedio de Ingresos a nivel de comunas
+ingresos <- BD3 %>% data.frame() %>% select(comuna,ingresos)
+ingresos$ingresos <- as.numeric(ingresos$ingresos)
+ingresos2 <- ingresos %>%group_by(comuna)%>%summarise(mean_ing_comuna=mean(ingresos,na.rm=TRUE))
+BD4 <- merge(BD3 ,ingresos2 ,by="comuna")
+#b)Porcentaje de arriendo sin contrato a nivel comunal)
+perc_arriendo <- BD3 %>% data.frame() %>% select(comuna,tipo_uso)
+perc_arriendo2 <- perc_arriendo %>%group_by(comuna)%>%summarise(sin_contrato_comuna= length(which(tipo_uso==6))/(length(which(tipo_uso==5))+length(which(tipo_uso==6))))
+BD5 <- merge(BD4 ,perc_arriendo2 ,by="comuna")
+#c) Porcentaje migrantes por comuna
+porc_migr <- BD2 %>% data.frame() %>% select(comuna,nac)
+porc_migr2 <- porc_migr %>%group_by(comuna)%>%summarise(porc_migr_comuna= length(which(nac==3))/(length(which(nac==1))+length(which(nac==2))))
+BD6 <- merge(BD5 ,porc_migr2 ,by="comuna")
+#d) Acceso a servicios por comuna
+acceso_comuna <- BD6 %>% data.frame() %>% select(comuna,acceso_servicios) 
+acceso_comuna2 <- acceso_comuna %>%group_by(comuna)%>%summarise(acceso_comunal=mean(acceso_servicios,na.rm=TRUE))
+BD6 <- merge(BD6 ,acceso_comuna2 ,by="comuna")
+```
+```{r Recode NA ingresos}
+BD6$ingresos[99] <- NA
+```
+
+```{r Guardar base de datos}
+df_arriendos <- BD6
+save(df_arriendos, file = "../input/data/df_arriendos.RData")
+```
+

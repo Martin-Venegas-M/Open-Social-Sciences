@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Statistical models</title>
+<style>
+table.texreg {margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;}
+table.texreg thead .rule {border-bottom: 1px solid #000000;}
+table.texreg tbody tr.rule td {border-top: 1px solid #000000;}
+table.texreg tbody tr.bottomrule td {border-bottom: 2px solid #000000;}
+table.texreg tfoot td {font-size: 0.8em;}
+table.texreg th, table.texreg td {padding-left: 5px;padding-right: 5px;}
+</style>
+</head>
+<body>
+<table class="texreg">
+<caption>Statistical models</caption>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Modelo Nulo</th>
+<th>Modelo mixto fijo</th>
+<th>Modelo mixto aleatorio</th>
+<th>Modelo Interaccion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rule">
+<td>Intercepto</td>
+<td>205342.15<sup>***</sup></td>
+<td>27141.81</td>
+<td>59109.66</td>
+<td>-79030.68</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>(9999.57)</td>
+<td>(58957.92)</td>
+<td>(58639.82)</td>
+<td>(439192.49)</td>
+</tr>
+<tr>
+<td>Sexo</td>
+<td>&nbsp;</td>
+<td>8995.68</td>
+<td>10163.84<sup>*</sup></td>
+<td>10421.41<sup>*</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(5076.10)</td>
+<td>(4916.14)</td>
+<td>(4917.42)</td>
+</tr>
+<tr>
+<td>Centroamerica y el Caribe</td>
+<td>&nbsp;</td>
+<td>16912.41</td>
+<td>13895.61</td>
+<td>7826.81</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(17584.68)</td>
+<td>(25287.92)</td>
+<td>(463282.07)</td>
+</tr>
+<tr>
+<td>Sudamerica</td>
+<td>&nbsp;</td>
+<td>8388.66</td>
+<td>12271.05</td>
+<td>154198.83</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(15955.12)</td>
+<td>(19119.70)</td>
+<td>(442106.49)</td>
+</tr>
+<tr>
+<td>Ano de llegada</td>
+<td>&nbsp;</td>
+<td>1.48</td>
+<td>1.80</td>
+<td>1.71</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(0.95)</td>
+<td>(0.93)</td>
+<td>(0.93)</td>
+</tr>
+<tr>
+<td>Arriendo sin contrato</td>
+<td>&nbsp;</td>
+<td>-67386.82<sup>***</sup></td>
+<td>-67229.24<sup>***</sup></td>
+<td>-67038.34<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(6082.90)</td>
+<td>(5950.03)</td>
+<td>(5951.20)</td>
+</tr>
+<tr>
+<td>Monto de ingresos</td>
+<td>&nbsp;</td>
+<td>0.07<sup>***</sup></td>
+<td>0.06<sup>***</sup></td>
+<td>0.06<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(0.01)</td>
+<td>(0.01)</td>
+<td>(0.01)</td>
+</tr>
+<tr>
+<td>Tiene contrato laboral sin firmar</td>
+<td>&nbsp;</td>
+<td>-7860.70</td>
+<td>-6390.70</td>
+<td>-6500.27</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(19514.23)</td>
+<td>(18807.80)</td>
+<td>(18810.07)</td>
+</tr>
+<tr>
+<td>No tiene contrato</td>
+<td>&nbsp;</td>
+<td>-1158.50</td>
+<td>-2326.43</td>
+<td>-3044.25</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(7356.06)</td>
+<td>(7179.90)</td>
+<td>(7190.23)</td>
+</tr>
+<tr>
+<td>indice de acceso a servicios</td>
+<td>&nbsp;</td>
+<td>23044.96</td>
+<td>22857.50</td>
+<td>22215.53</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(19755.86)</td>
+<td>(19821.47)</td>
+<td>(19856.57)</td>
+</tr>
+<tr>
+<td>Muro de Albanileria (bloque de cemento, piedra o ladrillo)</td>
+<td>&nbsp;</td>
+<td>-43658.08<sup>***</sup></td>
+<td>-37564.68<sup>***</sup></td>
+<td>-37483.41<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(6906.34)</td>
+<td>(6704.89)</td>
+<td>(6720.05)</td>
+</tr>
+<tr>
+<td>Muro de Tabique forrado por ambas caras (madera, acero, lata u otro)</td>
+<td>&nbsp;</td>
+<td>-42127.45<sup>***</sup></td>
+<td>-41601.91<sup>***</sup></td>
+<td>-40940.54<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(8840.48)</td>
+<td>(8733.78)</td>
+<td>(8743.65)</td>
+</tr>
+<tr>
+<td>Muro de Tabique sin forro interior (madera u otro)</td>
+<td>&nbsp;</td>
+<td>-66988.19<sup>***</sup></td>
+<td>-66309.39<sup>***</sup></td>
+<td>-65456.48<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(17417.27)</td>
+<td>(17004.22)</td>
+<td>(17013.86)</td>
+</tr>
+<tr>
+<td>Muro de Adobe, barro, quincha, pirca u otro artesanal tradicional</td>
+<td>&nbsp;</td>
+<td>-68404.12<sup>***</sup></td>
+<td>-65664.89<sup>***</sup></td>
+<td>-65321.57<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(12761.51)</td>
+<td>(12381.77)</td>
+<td>(12393.03)</td>
+</tr>
+<tr>
+<td>30 a 40 m2</td>
+<td>&nbsp;</td>
+<td>26626.73<sup>**</sup></td>
+<td>24595.20<sup>**</sup></td>
+<td>24683.00<sup>**</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(9354.28)</td>
+<td>(9189.45)</td>
+<td>(9190.76)</td>
+</tr>
+<tr>
+<td>41 a 60 m2</td>
+<td>&nbsp;</td>
+<td>52330.81<sup>***</sup></td>
+<td>50257.31<sup>***</sup></td>
+<td>50498.05<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(8541.48)</td>
+<td>(8471.94)</td>
+<td>(8479.29)</td>
+</tr>
+<tr>
+<td>61 a 100 m2</td>
+<td>&nbsp;</td>
+<td>86014.14<sup>***</sup></td>
+<td>83181.43<sup>***</sup></td>
+<td>83090.61<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(8998.70)</td>
+<td>(8954.61)</td>
+<td>(8956.99)</td>
+</tr>
+<tr>
+<td>101 a 150 m2</td>
+<td>&nbsp;</td>
+<td>127446.98<sup>***</sup></td>
+<td>123039.26<sup>***</sup></td>
+<td>123506.99<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(13026.09)</td>
+<td>(12843.12)</td>
+<td>(12873.38)</td>
+</tr>
+<tr>
+<td>Mas de 150 m2</td>
+<td>&nbsp;</td>
+<td>216320.76<sup>***</sup></td>
+<td>183348.60<sup>***</sup></td>
+<td>182878.32<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(18174.30)</td>
+<td>(17965.12)</td>
+<td>(17993.30)</td>
+</tr>
+<tr>
+<td>Cantidad de banos</td>
+<td>&nbsp;</td>
+<td>1069.25</td>
+<td>1036.31</td>
+<td>1039.43</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(877.91)</td>
+<td>(847.89)</td>
+<td>(847.78)</td>
+</tr>
+<tr>
+<td>Cantidad de dormitorios</td>
+<td>&nbsp;</td>
+<td>-452.86</td>
+<td>-390.95</td>
+<td>-389.84</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(734.70)</td>
+<td>(710.90)</td>
+<td>(710.80)</td>
+</tr>
+<tr>
+<td>Ingreso promedio comunal</td>
+<td>&nbsp;</td>
+<td>0.13<sup>***</sup></td>
+<td>0.12<sup>***</sup></td>
+<td>0.14<sup>***</sup></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(0.02)</td>
+<td>(0.02)</td>
+<td>(0.02)</td>
+</tr>
+<tr>
+<td>Porcentaje de arriendo sin contrato comunal</td>
+<td>&nbsp;</td>
+<td>15943.44</td>
+<td>10461.78</td>
+<td>255557.25</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(25386.25)</td>
+<td>(23899.62)</td>
+<td>(165169.39)</td>
+</tr>
+<tr>
+<td>Porcentaje de poblacion migrante comunal</td>
+<td>&nbsp;</td>
+<td>101387.31</td>
+<td>29598.67</td>
+<td>7287.06</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(110228.72)</td>
+<td>(72644.46)</td>
+<td>(75335.21)</td>
+</tr>
+<tr>
+<td>Acceso a servicios promedio comunal</td>
+<td>&nbsp;</td>
+<td>60404.36</td>
+<td>28013.81</td>
+<td>122129.48</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(60754.91)</td>
+<td>(59660.25)</td>
+<td>(440138.33)</td>
+</tr>
+<tr>
+<td>Centroamerica y el Caribe * %Arriendo sin contrato comunal</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-200503.93</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(173764.35)</td>
+</tr>
+<tr>
+<td>Sudamerica * %Arriendo sin contrato comunal</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-250163.18</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(164558.41)</td>
+</tr>
+<tr>
+<td>Centroamerica y el Caribe * Acceso a servicios promedio comunal</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>36554.65</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(465382.42)</td>
+</tr>
+<tr>
+<td>Sudamerica * Acceso a servicios promedio comunal</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-100733.03</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>(443440.15)</td>
+</tr>
+<tr class="rule">
+<td>AIC</td>
+<td>112764.77</td>
+<td>54518.22</td>
+<td>54431.30</td>
+<td>54332.33</td>
+</tr>
+<tr>
+<td>BIC</td>
+<td>112783.83</td>
+<td>54670.77</td>
+<td>54612.09</td>
+<td>54535.72</td>
+</tr>
+<tr>
+<td>Log Likelihood</td>
+<td>-56379.38</td>
+<td>-27232.11</td>
+<td>-27183.65</td>
+<td>-27130.16</td>
+</tr>
+<tr>
+<td>Num. obs.</td>
+<td>4242</td>
+<td>2100</td>
+<td>2100</td>
+<td>2100</td>
+</tr>
+<tr>
+<td>Num. groups: comuna</td>
+<td>152</td>
+<td>129</td>
+<td>129</td>
+<td>129</td>
+</tr>
+<tr>
+<td>Var: comuna (Intercept)</td>
+<td>11460247556.57</td>
+<td>4368846395.62</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>Var: Residual</td>
+<td>19224473044.00</td>
+<td>12326889942.80</td>
+<td>11453242592.43</td>
+<td>11446721806.96</td>
+</tr>
+<tr>
+<td>Var: comuna origenCentroamerica y el Caribe</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>16952305266.78</td>
+<td>16935879977.84</td>
+</tr>
+<tr>
+<td>Var: comuna origenRegion Sudamericana</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>2765807467.37</td>
+<td>2795749731.44</td>
+</tr>
+<tr>
+<td>Cov: comuna (Intercept) origenCentroamerica y el Caribe</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>Cov: comuna (Intercept) origenRegion Sudamericana</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="bottomrule">
+<td>Cov: comuna origenCentroamerica y el Caribe origenRegion Sudamericana</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>4419255522.12</td>
+<td>4394767315.16</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5"><sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05</td>
+</tr>
+</tfoot>
+</table>
+</body>
+</html>
