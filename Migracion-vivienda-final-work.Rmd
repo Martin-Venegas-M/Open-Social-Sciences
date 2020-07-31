@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 
 Sys.setlocale("LC_ALL","ES_ES.UTF-8")
 options(scipen = 999)
+getwd()
 ```
 
 ```{r Cargar librerias, include=FALSE}
@@ -479,12 +480,6 @@ ggcorrplot(cor_viv, hc.order = TRUE, type = "full",lab=TRUE,colors = c("#439BD1"
 
 ## Modelos multinivel
 **Tabla 4:** *Regresiones multinivel*
-```{r Tabla lista modelos, eval=FALSE, include=FALSE}
-htmlreg(c(results_0a,results_3,results_4,results_5), file = "../output/tables/results_modelos.html", 
-inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
-head.tag = TRUE, body.tag = TRUE,custom.coef.names = label_intera,custom.model.names
-= c("Modelo Nulo","Modelo mixto fijo","Modelo mixto aleatorio","Modelo Interaccion"))
-```
 
 ![](https://fotos.subefotos.com/1f42654970a3824474f269c389bc51beo.png)
 
