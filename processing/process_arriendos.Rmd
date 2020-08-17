@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 #Datos CASEN 2017#
 #Instalación de librerías
 pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest)
-pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, reghelper, openxlsx)
+pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, reghelper, openxlsx, sessioninfo)
 ```
 
 ```{r Carga BD}
