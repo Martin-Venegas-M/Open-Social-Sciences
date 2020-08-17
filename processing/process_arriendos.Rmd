@@ -257,3 +257,9 @@ df_arriendos <- BD6
 save(df_arriendos, file = "../input/data/df_arriendos.RData")
 ```
 
+```{r Información de la sesión, include=FALSE}
+sessionInfo()
+session_info("sessioninfo")$platform
+package_info(pkgs = (.packages()), dependencies = FALSE)
+
+```

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #Datos CASEN 2017#
 #Instalacion de librerias
 pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest)
-pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, webshot)
+pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, webshot, sessioninfo)
 ```
 
 ```{r Carga BD}
@@ -220,3 +220,11 @@ head.tag = TRUE, body.tag = TRUE,custom.coef.names = label_intera,custom.model.n
 ```{r Tabla modelos a png, eval=FALSE, include=FALSE}
 webshot("../output/tables/results_modelos.html","../input/images/results_modelos.png")
 ```
+
+```{r Información de la sesión, include=FALSE}
+sessionInfo()
+session_info("sessioninfo")$platform
+package_info(pkgs = (.packages()), dependencies = FALSE)
+
+```
+
