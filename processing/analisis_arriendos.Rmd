@@ -20,6 +20,8 @@ pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, webshot
 ```{r Carga BD}
 # Cargar base de datos
 load("../input/data/df_arriendos.RData")
+
+df_arriendos <- sjlabelled::remove_all_labels(df_arriendos)
 ```
 
 ```{r Descriptivos univariados}
