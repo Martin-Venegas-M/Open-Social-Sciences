@@ -22,7 +22,7 @@ getwd()
 # Cargar librerías
 library(pacman)
 pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest, citr)
-pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, reghelper, openxlsx, summarytools, rmarkdown)
+pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, reghelper, openxlsx, summarytools, rmarkdown, sessioninfo)
 ```
 
 ```{r Cargar base de datos, include=FALSE}
