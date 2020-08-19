@@ -612,6 +612,12 @@ planteadas para ser puntos de inicio para investigaciones futura. Se propone com
 trabajar con países en específico como Haití, en vista la precariedad con la que residen en Chile [@roesslerInformeAccesoVivienda2020] y asimismo se propone la difusión del uso de herramientas multinivel para la realización futura
 de estudios más integrales.  
 
+```{r Información de la sesión, include=FALSE}
+sessionInfo()
+session_info("sessioninfo")$platform
+package_info(pkgs = (.packages()), dependencies = FALSE)
+```
+
 # Referencias {#tit7}
 [^1]: De aquí en adelante, cada vez que se refiere a “el modelo”, se estará hablando del último modelo calculado, es decir; el
 **“Modelo de Interacción”**
