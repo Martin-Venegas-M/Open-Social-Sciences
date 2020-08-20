@@ -13,15 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r Carga Paquetes}
 #Datos CASEN 2017#
 #Instalacion de librerias
-pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest)
+pacman::p_load(ggplot2,plotly, dplyr, stargazer, texreg, corrplot, haven, sjlabelled, psych, writexl, ggmosaic, DescTools, lme4, lmerTest, openxlsx)
 pacman::p_load(kableExtra, pander, descr, expss,car, foreign,ggcorrplot, webshot, sessioninfo)
 ```
 
 ```{r Carga BD}
 # Cargar base de datos
 load("../input/data/df_arriendos.RData")
-
-df_arriendos <- sjlabelled::remove_all_labels(df_arriendos)
 ```
 
 ```{r Descriptivos univariados}

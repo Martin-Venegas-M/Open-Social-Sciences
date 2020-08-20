@@ -248,8 +248,10 @@ acceso_comuna <- BD6 %>% data.frame() %>% select(comuna,acceso_servicios)
 acceso_comuna2 <- acceso_comuna %>%group_by(comuna)%>%summarise(acceso_comunal=mean(acceso_servicios,na.rm=TRUE))
 BD6 <- merge(BD6 ,acceso_comuna2 ,by="comuna")
 ```
-```{r Recode NA ingresos}
+```{r Modificaciones}
 BD6$ingresos[99] <- NA
+BD6 <- sjlabelled::remove_all_labels(BD6)
+BD6$ingresos <- as.numeric(BD6$ingresos)
 ```
 
 ```{r Guardar base de datos}
