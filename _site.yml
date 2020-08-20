@@ -4,7 +4,7 @@ navbar:
   title: "Migración y vivienda"
   left:
   - text: "Paper"
-    href: paper.html
+    href: migracion-vivienda-final-work.html
   right:
   - icon: fa-envelope fa-lg
     href: (aquí correo)
