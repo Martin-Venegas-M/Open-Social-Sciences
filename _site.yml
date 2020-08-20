@@ -1,7 +1,7 @@
 name: "Mi Nombre"
 output_dir: "."
 navbar:
-  title: "Ejemplo WEB"
+  title: "Migración y vivienda"
   left:
   - text: "Paper"
     href: paper.html
