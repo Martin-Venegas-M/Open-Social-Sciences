@@ -12,5 +12,5 @@ navbar:
     href: https://github.com/Martin-Venegas-M/Open-Social-Sciences
 output:
   html_document:
-    theme: cerulean # yeti  spacelab simplex sandstone cosmo cerulean paper darkly flatly lumen readable
+    theme: cosmo # yeti  spacelab simplex sandstone cosmo cerulean paper darkly flatly lumen readable
     css: 'styles.css'
