@@ -4,7 +4,7 @@ navbar:
   title: "Migración y vivienda"
   left:
   - text: "Paper"
-    href: migracion-vivienda-final-work.html
+    href: Migracion-vivienda-final-work.html
   right:
   - icon: fa-envelope fa-lg
     href: martin.venegas@ug.uchile.cl
