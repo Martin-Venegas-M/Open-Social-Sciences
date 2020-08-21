@@ -14,7 +14,7 @@ This website contains the final document for the study <i> "Migration and housin
 [here](http://observatorio.ministeriodesarrollosocial.gob.cl/casen-multidimensional/casen/docs/casen_2017_spss.rar).
 5. The following paper is reproducible under [IPO protocol](https://juancarloscastillo.github.io/ipo/)
 6. For more information check the [course page](https://cienciasocialabierta.netlify.app/)
-7. The following paper is stil spanish version. For more details see the repository of the paper.  
+7. The following paper is still spanish version. For more details see the repository of the paper.  
 
 ## Authors:
 ### Undergraduate students of sociology, department of Social Sciences, Universidad de Chile:
