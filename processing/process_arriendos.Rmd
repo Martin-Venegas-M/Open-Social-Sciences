@@ -7,7 +7,7 @@ output: html_document
 # Resumen  
 En el presente documento se procesa la base de datos de la Encuesta de Caracterización Socioeconómica (CASEN) en su versión 2017, con el fin de producir una base de datos con lo estrictamente necesario para el desarrollo del trabajo en curso. 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r Carga Paquetes}
