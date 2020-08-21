@@ -1,7 +1,11 @@
 ---
-title: "Sitio Web"
+title: "Migración y vivienda: estudio de los costos de arriendo para el 2017"
 ---
 
 <br>
 
-Información de ejemplo para sitio web
+Este sitio web contiene el documento final del trabajo <i> Migración y vivienda: estudio de los costos de arriendo para el 2017 <i> en el marco del curso  <i>"SOC01073-1 Electivo de Profundización Metodológica - Ciencia Social Abierta: Herramientas para la Reproducibilidad, Colaboración y Comunicación de la Investigación Social 2020, Primer Semestre"<i>
+
+Autores:
+Diego Esturillo Sáez
+Martín Venegas Márquez

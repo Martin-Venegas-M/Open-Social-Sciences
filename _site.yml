@@ -1,7 +1,7 @@
 name: "Mi Nombre"
 output_dir: "."
 navbar:
-  title: "Migración y vivienda"
+  title: "Migración y vivienda: estudio de los costos de arriendo para el 2017"
   left:
   - text: "Paper"
     href: Migracion-vivienda-final-work.html
