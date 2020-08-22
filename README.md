@@ -10,7 +10,7 @@ Este repositorio alberga los trabajos que se vayan realizando en el ramo: *"SOC0
 5. La base de datos originaria del trabajo corresponde a la CASEN 2017, sin embargo esta no ha sido subida al repositorio por exceder el máximo de peso. Para descargar hacer click 
 [aquí](http://observatorio.ministeriodesarrollosocial.gob.cl/casen-multidimensional/casen/docs/casen_2017_spss.rar).
 6. El siguiente trabajo es reproducible bajo la estructura del [protocolo IPO](https://juancarloscastillo.github.io/ipo/)
-7. Para más información se puede revisar la [página del curso](https://cienciasocialabierta.netlify.app/)
+7. Para más información se puede revisar la [página del curso](https://cienciasocialabierta.netlify.app/)  
 **8. Página web del paper disponible [aquí](https://martin-venegas-m.github.io/Open-Social-Sciences/)**
 
 
