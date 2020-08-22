@@ -297,7 +297,7 @@ la población migrante por comuna según el porcentaje de arriendo sin contrato 
 Chile al año 2017.
 5. Explorar cambios en el efecto de la nacionalidad sobre las diferencias de costos de arriendo de
 la población migrante por comuna según el acceso a servicios en la comuna en Chile al año
-2017.
+2017.  
 
 ## II. Hipótesis.
 ### Hipótesis general:
