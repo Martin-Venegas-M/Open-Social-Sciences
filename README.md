@@ -11,6 +11,6 @@ Este repositorio alberga los trabajos que se vayan realizando en el ramo: *"SOC0
 [aquí](http://observatorio.ministeriodesarrollosocial.gob.cl/casen-multidimensional/casen/docs/casen_2017_spss.rar).
 6. El siguiente trabajo es reproducible bajo la estructura del [protocolo IPO](https://juancarloscastillo.github.io/ipo/)
 7. Para más información se puede revisar la [página del curso](https://cienciasocialabierta.netlify.app/)
-8. Página web del paper disponible [aquí](https://martin-venegas-m.github.io/Open-Social-Sciences/)
+8. **Página web del paper disponible [aquí](https://martin-venegas-m.github.io/Open-Social-Sciences/)**
 
 
