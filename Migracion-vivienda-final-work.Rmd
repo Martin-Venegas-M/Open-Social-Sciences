@@ -353,7 +353,7 @@ Tomando como referencia las variables consideradas, se presentan a continuación
 una:  
 
 **Gráfico 1:** _Descriptiva de variable costos de arriendo_
-```{r Grafico 1: Descriptiva de variable costo arriendo, echo=FALSE}
+```{r Grafic, echo=FALSE}
 #) Costo Arriendo
 df_arriendos %>% ggplot(aes(x=costo_arr)) + geom_density(fill="#69b3a2", color="#e9ecef", alpha=1) + ggtitle("")
 ```
